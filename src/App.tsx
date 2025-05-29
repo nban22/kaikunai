@@ -12,6 +12,9 @@ import SettingsPage from './pages/SettingsPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import FeedbackPage from './pages/FeedbackPage';
+import TermsPage from './pages/TermsPage';
+import PaymentHistoryPage from './pages/PaymentHistoryPage';
+import UsageHistoryPage from './pages/UsageHistoryPage';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="feedback" element={<FeedbackPage />} />
+          <Route path="terms" element={<TermsPage />} />
+          <Route path="payment-history" element={<PaymentHistoryPage />} />
+          <Route path="usage-history" element={<UsageHistoryPage />} />
         </Route>
       </Routes>
     </Router>
