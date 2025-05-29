@@ -18,13 +18,21 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ isOpen, onClose }) => {
     joinDate: 'May 2025'
   };
 
+  const menuItems = [
+    { name: 'Profile Settings', path: '/settings/profile', icon: <User size={16} /> },
+    { name: 'Payment History', path: '/payment-history', icon: <CreditCard size={16} /> },
+    { name: 'Usage History', path: '/usage-history', icon: <Clock size={16} /> },
+    { name: 'Notifications', path: '/settings/notifications', icon: <Bell size={16} /> },
+    { name: 'Terms of Service', path: '/terms', icon: <Shield size={16} /> },
+  ];
+
   const handleNavigation = (path: string) => {
     navigate(path);
     onClose();
   };
 
   return (
-    <div className={`absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-30 border border-gray-200`}>
+    <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg py-1 z-30 border border-gray-200">
       {/* User Info Section */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center">
@@ -42,47 +50,18 @@ const ProfileDisplay: React.FC<ProfileDisplayProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      {/* Menu Items */}
       <div className="py-2">
-        <button
-          onClick={() => handleNavigation('/settings/profile')}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <User size={16} className="mr-3" />
-          <span>Profile Settings</span>
-        </button>
-        
-        <button
-          onClick={() => handleNavigation('/settings/notifications')}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <Bell size={16} className="mr-3" />
-          <span>Notification Preferences</span>
-        </button>
-
-        <button
-          onClick={() => handleNavigation('/settings/privacy')}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <Shield size={16} className="mr-3" />
-          <span>Privacy Settings</span>
-        </button>
-
-        <button
-          onClick={() => handleNavigation('/settings/billing')}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <CreditCard size={16} className="mr-3" />
-          <span>Billing & Subscription</span>
-        </button>
-
-        <button
-          onClick={() => handleNavigation('/history')}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-        >
-          <Clock size={16} className="mr-3" />
-          <span>Activity History</span>
-        </button>
+        {menuItems.map((item) => (
+          <button
+            key={item.path}
+            onClick={() => handleNavigation(item.path)}
+            className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          >
+            <span className="mr-3">{item.icon}</span>
+            <span>{item.name}</span>
+          </button>
+        ))}
       </div>
 
       {/* Logout */}

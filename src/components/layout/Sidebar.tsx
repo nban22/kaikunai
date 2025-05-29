@@ -13,7 +13,10 @@ import {
   MessageSquare,
   ChevronLeft,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Shield,
+  Clock,
+  CreditCard
 } from 'lucide-react';
 import { KaikunLogo } from '../icons/KaikunLogo';
 
@@ -32,11 +35,17 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, toggleSidebar }) => {
     { name: 'AI Community', path: '/community', icon: <Users size={20} /> },
   ];
 
+  const accountItems = [
+    { name: 'Payment History', path: '/payment-history', icon: <CreditCard size={20} /> },
+    { name: 'Usage History', path: '/usage-history', icon: <Clock size={20} /> },
+  ];
+
   const secondaryItems = [
     { name: 'Settings', path: '/settings', icon: <Settings size={20} /> },
     { name: 'About', path: '/about', icon: <Info size={20} /> },
     { name: 'Contact', path: '/contact', icon: <Phone size={20} /> },
     { name: 'Feedback', path: '/feedback', icon: <MessageSquare size={20} /> },
+    { name: 'Terms', path: '/terms', icon: <Shield size={20} /> },
   ];
 
   return (
@@ -79,6 +88,33 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, toggleSidebar }) => {
           ))}
         </ul>
 
+        {/* Account Section */}
+        <div className="mt-6 border-t border-gray-700 pt-4">
+          <div className="px-4 mb-2">
+            <span className="text-xs font-medium text-gray-400 uppercase">Account</span>
+          </div>
+          <ul className="space-y-1 px-2">
+            {accountItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) => 
+                    `flex items-center p-2 rounded-md transition-colors ${
+                      isActive 
+                        ? 'bg-gray-700 text-white' 
+                        : 'text-gray-400 hover:bg-gray-700 hover:text-gray-200'
+                    }`
+                  }
+                >
+                  <span className="flex-shrink-0">{item.icon}</span>
+                  {!collapsed && <span className="ml-3">{item.name}</span>}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Secondary Items */}
         <div className="mt-6 border-t border-gray-700 pt-4">
           <ul className="space-y-1 px-2">
             {secondaryItems.map((item) => (
