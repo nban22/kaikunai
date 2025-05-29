@@ -140,3 +140,5 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleNotificationCenter
     </header>
   );
 };
+
+export default Header
