@@ -6,15 +6,17 @@ import {
   LogOut, 
   Clock, 
   ChevronDown, 
-  Zap
+  Zap,
+  Bell
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   toggleSidebar: () => void;
+  toggleNotificationCenter: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
+const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleNotificationCenter }) => {
   const navigate = useNavigate();
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -26,12 +28,11 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
   ];
 
   const handleLanguageSelect = (code: string) => {
-    // Handle language change
     setLanguageDropdownOpen(false);
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 z-10 shadow-sm">
+    <header className="bg-white border-b border-gray-200 z-20 shadow-sm">
       <div className="flex justify-between items-center px-4 py-2">
         <div className="flex items-center">
           <button 
@@ -55,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </button>
 
             {languageDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 border border-gray-200">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 border border-gray-200">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -76,6 +77,15 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             <span className="text-sm font-medium">47</span>
           </div>
 
+          {/* Notifications */}
+          <button 
+            onClick={toggleNotificationCenter}
+            className="relative p-2 rounded-full hover:bg-gray-100"
+          >
+            <Bell size={20} />
+            <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+
           {/* User Profile */}
           <div className="relative">
             <button 
@@ -89,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
             </button>
 
             {userDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 border border-gray-200">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 border border-gray-200">
                 <button
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   onClick={() => {
@@ -130,5 +140,3 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     </header>
   );
 };
-
-export default Header;
