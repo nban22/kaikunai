@@ -72,3 +72,5 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ isOpen, onClose
     </div>
   );
 };
+
+export default NotificationCenter
