@@ -10,6 +10,7 @@ import {
   Bell
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ProfileDisplay from './ProfileDisplay';
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -19,7 +20,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleNotificationCenter }) => {
   const navigate = useNavigate();
   const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false);
-  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   const languages = [
     { code: 'en', name: 'English' },
@@ -90,49 +91,19 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleNotificationCenter
           <div className="relative">
             <button 
               className="flex items-center"
-              onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
             >
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-gray-700">
-                <span>N</span>
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+                <span>J</span>
               </div>
               <ChevronDown size={16} className="ml-1 text-gray-600" />
             </button>
 
-            {userDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30 border border-gray-200">
-                <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => {
-                    navigate('/settings');
-                    setUserDropdownOpen(false);
-                  }}
-                >
-                  <div className="flex items-center">
-                    <User size={16} className="mr-2" />
-                    <span>Account</span>
-                  </div>
-                </button>
-                <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => {
-                    navigate('/history');
-                    setUserDropdownOpen(false);
-                  }}
-                >
-                  <div className="flex items-center">
-                    <Clock size={16} className="mr-2" />
-                    <span>History</span>
-                  </div>
-                </button>
-                <button
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  <div className="flex items-center">
-                    <LogOut size={16} className="mr-2" />
-                    <span>Logout</span>
-                  </div>
-                </button>
-              </div>
+            {profileDropdownOpen && (
+              <ProfileDisplay
+                isOpen={profileDropdownOpen}
+                onClose={() => setProfileDropdownOpen(false)}
+              />
             )}
           </div>
         </div>
@@ -141,4 +112,4 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleNotificationCenter
   );
 };
 
-export default Header
+export default Header;
